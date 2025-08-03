@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text3D, Float, MeshTransmissionMaterial, Environment } from '@react-three/drei';
+import { OrbitControls, Float, MeshTransmissionMaterial, Environment } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Floating Geometry Component
@@ -157,21 +157,10 @@ function Scene() {
       <CameraModel position={[2, 0, 0]} />
       <CameraModel position={[-4, 1, -2]} />
 
-      {/* Central 3D Text */}
+      {/* Central Floating Sphere with Material */}
       <Float speed={2} rotationIntensity={0.2} floatIntensity={0.3}>
-        <Text3D
-          font="/fonts/helvetiker_regular.typeface.json"
-          position={[0, 0, 0]}
-          size={0.8}
-          height={0.2}
-          curveSegments={12}
-          bevelEnabled
-          bevelThickness={0.02}
-          bevelSize={0.02}
-          bevelOffset={0}
-          bevelSegments={5}
-        >
-          CREATIVE
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[1.5, 32, 32]} />
           <MeshTransmissionMaterial
             color="#00ffff"
             thickness={0.3}
@@ -181,7 +170,7 @@ function Scene() {
             chromaticAberration={0.06}
             backside
           />
-        </Text3D>
+        </mesh>
       </Float>
 
       {/* Particle System */}
