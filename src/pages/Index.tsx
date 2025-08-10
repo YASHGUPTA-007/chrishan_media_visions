@@ -5,6 +5,7 @@ import About from '@/components/pages/About';
 import Services from '@/components/pages/Services';
 import Portfolio from '@/components/pages/Portfolio';
 import Contact from '@/components/pages/Contact';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -30,6 +31,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <FloatingHeader currentPage={currentPage} onNavigate={setCurrentPage} />
       {renderPage()}
+      <Footer />
     </div>
   );
 };
