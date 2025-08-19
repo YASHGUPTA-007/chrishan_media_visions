@@ -26,8 +26,45 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative min-h-screen pt-24 pb-16 overflow-hidden">
+      {/* Themed background overlays and particles */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 gradient-radial" />
+        <div className="absolute inset-0 bg-background/40" />
+
+        {/* Floating particles */}
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-primary/30"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                willChange: 'transform, opacity'
+              }}
+              animate={{ y: [0, -15, 0], opacity: [0.3, 0.8, 0.3] }}
+              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+            />
+          ))}
+
+          {/* Geometric accents */}
+          <motion.div
+            className="absolute top-16 left-8 w-12 h-12 border-2 border-primary/30 rounded-full"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 6, repeat: Infinity }}
+            style={{ willChange: 'transform' }}
+          />
+          <motion.div
+            className="absolute bottom-24 right-10 w-10 h-10 rotate-45 border-2 border-accent/30"
+            animate={{ rotate: [45, 405] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+            style={{ willChange: 'transform' }}
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -145,7 +182,7 @@ const About = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

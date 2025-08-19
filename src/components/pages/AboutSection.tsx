@@ -57,37 +57,27 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="relative py-32 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
-      {/* Background Effects */}
+    <section className="relative py-32 overflow-hidden">
+      {/* Background Effects aligned with Hero */}
       <div className="absolute inset-0">
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5"
-          animate={{
-            background: [
-              'radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-              'radial-gradient(circle at 70% 70%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)',
-              'radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
-            ]
-          }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
+        <div className="absolute inset-0 gradient-radial" />
+        <div className="absolute inset-0 bg-background/40" />
 
         {/* Floating geometric shapes */}
         <motion.div
-          className="absolute top-20 left-10 w-32 h-32 border border-blue-400/20 rounded-full"
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 15, repeat: Infinity }}
+          className="absolute top-20 left-10 w-32 h-32 border-2 border-primary/20 rounded-full"
+          animate={{ rotate: [0, 360], scale: [1, 1.15, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-24 h-24 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rotate-45"
-          animate={{
-            rotate: [45, 405],
-            y: [0, -20, 0],
-          }}
+          className="absolute bottom-20 right-20 w-24 h-24 rotate-45 border-2 border-accent/20"
+          animate={{ rotate: [45, 405], y: [0, -20, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-1/4 w-10 h-10 bg-secondary/10"
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
         />
       </div>
 
@@ -107,13 +97,13 @@ const AboutSection = () => {
             transition={{ duration: 1, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <span className="text-white">About</span>{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent">
+            <span className="text-foreground">About</span>{' '}
+            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
               Our Story
             </span>
           </motion.h2>
           <motion.p
-            className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
@@ -140,7 +130,7 @@ const AboutSection = () => {
                 whileHover={{ y: -10 }}
               >
                 <motion.div
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 mb-6 group-hover:border-slate-600/50 transition-all duration-300"
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-full glass border border-white/10 mb-6 group-hover:border-primary/40 transition-all duration-300"
                   whileHover={{ 
                     scale: 1.1,
                     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
@@ -148,10 +138,10 @@ const AboutSection = () => {
                 >
                   <Icon className={`w-8 h-8 ${value.color}`} />
                 </motion.div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {value.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>
@@ -167,13 +157,13 @@ const AboutSection = () => {
           transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Meet Our{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
               Creative Team
             </span>
           </h3>
-          <p className="text-slate-300 max-w-2xl mx-auto">
+          <p className="text-foreground/80 max-w-2xl mx-auto">
             Talented professionals who bring diverse skills and fresh perspectives to every project.
           </p>
         </motion.div>
@@ -229,7 +219,7 @@ const AboutSection = () => {
                 />
               </div>
 
-              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+              <h4 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                 {member.name}
               </h4>
               <p className={`bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent font-medium`}>
@@ -241,7 +231,7 @@ const AboutSection = () => {
 
         {/* Company Stats */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-b border-slate-700/50"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-b border-border/50"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -263,7 +253,7 @@ const AboutSection = () => {
               viewport={{ once: true }}
             >
               <motion.div 
-                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2"
+                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 neon-cyan"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.1, type: "spring", stiffness: 100 }}
@@ -271,7 +261,7 @@ const AboutSection = () => {
               >
                 {stat.number}{stat.suffix}
               </motion.div>
-              <div className="text-slate-400 group-hover:text-slate-300 transition-colors">
+              <div className="text-foreground/60 group-hover:text-foreground/80 transition-colors">
                 {stat.label}
               </div>
             </motion.div>

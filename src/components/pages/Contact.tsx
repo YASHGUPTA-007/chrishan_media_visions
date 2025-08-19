@@ -40,8 +40,36 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="relative min-h-screen pt-24 pb-16 overflow-hidden">
+      {/* Themed background overlays and particles */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 gradient-radial" />
+        <div className="absolute inset-0 bg-background/40" />
+
+        <div className="absolute inset-0 pointer-events-none">
+          {Array.from({ length: 14 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-accent/30"
+              style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+              animate={{ y: [0, -18, 0], opacity: [0.25, 0.8, 0.25] }}
+              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 2 }}
+            />
+          ))}
+          <motion.div
+            className="absolute top-12 left-8 w-12 h-12 border-2 border-primary/30 rounded-full"
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-8 w-10 h-10 rotate-45 border-2 border-secondary/30"
+            animate={{ rotate: [45, 405] }}
+            transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
+          />
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -279,7 +307,7 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
