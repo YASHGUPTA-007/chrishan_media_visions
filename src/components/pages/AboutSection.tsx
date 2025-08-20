@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
 import { Users, Award, Clock, Heart } from 'lucide-react';
 
-const AboutSection = () => {
+interface AboutSectionProps {
+  onNavigate?: (page: string) => void;
+}
+
+const AboutSection = ({ onNavigate }: AboutSectionProps) => {
   const teamMembers = [
     {
       name: 'Alex Rodriguez',
@@ -56,26 +60,43 @@ const AboutSection = () => {
     }
   ];
 
+  const handleContactRedirect = () => {
+    console.log('Contact button clicked!'); // Debug log
+    if (onNavigate) {
+      console.log('Calling onNavigate with contact'); // Debug log
+      onNavigate('contact');
+    } else {
+      console.log('No onNavigate prop provided'); // Debug log
+      // Fallback: scroll to contact section if it exists on the same page
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        alert('Contact redirect clicked! Please connect the navigation function.');
+      }
+    }
+  };
+
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
       {/* Background Effects aligned with Hero */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 gradient-radial" />
-        <div className="absolute inset-0 bg-background/40" />
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-slate-900/40" />
 
         {/* Floating geometric shapes */}
         <motion.div
-          className="absolute top-20 left-10 w-32 h-32 border-2 border-primary/20 rounded-full"
+          className="absolute top-20 left-10 w-32 h-32 border-2 border-purple-400/20 rounded-full"
           animate={{ rotate: [0, 360], scale: [1, 1.15, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-24 h-24 rotate-45 border-2 border-accent/20"
+          className="absolute bottom-20 right-20 w-24 h-24 rotate-45 border-2 border-cyan-400/20"
           animate={{ rotate: [45, 405], y: [0, -20, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
         <motion.div
-          className="absolute top-1/3 right-1/4 w-10 h-10 bg-secondary/10"
+          className="absolute top-1/3 right-1/4 w-10 h-10 bg-pink-500/10"
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
         />
@@ -97,13 +118,13 @@ const AboutSection = () => {
             transition={{ duration: 1, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <span className="text-foreground">About</span>{' '}
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="text-white">About</span>{' '}
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Our Story
             </span>
           </motion.h2>
           <motion.p
-            className="text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
@@ -130,7 +151,7 @@ const AboutSection = () => {
                 whileHover={{ y: -10 }}
               >
                 <motion.div
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-full glass border border-white/10 mb-6 group-hover:border-primary/40 transition-all duration-300"
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-6 group-hover:border-purple-400/40 transition-all duration-300"
                   whileHover={{ 
                     scale: 1.1,
                     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
@@ -138,10 +159,10 @@ const AboutSection = () => {
                 >
                   <Icon className={`w-8 h-8 ${value.color}`} />
                 </motion.div>
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
                   {value.title}
                 </h3>
-                <p className="text-foreground/70 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>
@@ -157,13 +178,13 @@ const AboutSection = () => {
           transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Meet Our{' '}
-            <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Creative Team
             </span>
           </h3>
-          <p className="text-foreground/80 max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Talented professionals who bring diverse skills and fresh perspectives to every project.
           </p>
         </motion.div>
@@ -219,7 +240,7 @@ const AboutSection = () => {
                 />
               </div>
 
-              <h4 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
                 {member.name}
               </h4>
               <p className={`bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent font-medium`}>
@@ -231,7 +252,7 @@ const AboutSection = () => {
 
         {/* Company Stats */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-b border-border/50"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-b border-white/10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -253,7 +274,8 @@ const AboutSection = () => {
               viewport={{ once: true }}
             >
               <motion.div 
-                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 neon-cyan"
+                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.5))' }}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.1, type: "spring", stiffness: 100 }}
@@ -261,11 +283,189 @@ const AboutSection = () => {
               >
                 {stat.number}{stat.suffix}
               </motion.div>
-              <div className="text-foreground/60 group-hover:text-foreground/80 transition-colors">
+              <div className="text-gray-400 group-hover:text-gray-300 transition-colors">
                 {stat.label}
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Contact Redirect Section */}
+        <motion.div
+          className="mt-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="relative group cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+            onClick={handleContactRedirect}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleContactRedirect();
+              }
+            }}
+          >
+            <div className="relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-purple-400/40 transition-all duration-500">
+              {/* Background Effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Floating particles */}
+              <motion.div
+                className="absolute top-8 right-8 w-4 h-4 rounded-full bg-blue-400/30"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.3, 0.7, 0.3],
+                  x: [0, 10, 0],
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="absolute bottom-12 left-12 w-3 h-3 rounded-full bg-purple-400/30"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                  x: [0, -8, 0],
+                  y: [0, 8, 0],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+              />
+              <motion.div
+                className="absolute top-1/2 left-8 w-2 h-2 rounded-full bg-cyan-400/40"
+                animate={{
+                  scale: [1, 1.8, 1],
+                  opacity: [0.4, 0.8, 0.4],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
+              />
+
+              <div className="relative z-10 px-8 md:px-12 py-12 md:py-16 text-center">
+                <motion.div
+                  className="mb-6"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 150 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-purple-400/40 transition-all duration-300 mb-2">
+                    <motion.div
+                      className="text-4xl"
+                      animate={{ 
+                        rotateY: [0, 360],
+                      }}
+                      transition={{ 
+                        duration: 8, 
+                        repeat: Infinity, 
+                        ease: "linear" 
+                      }}
+                    >
+                      ✨
+                    </motion.div>
+                  </div>
+                  
+                  <motion.div
+                    className="w-24 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 rounded-full mx-auto group-hover:w-32 transition-all duration-500"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '6rem' }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
+                    viewport={{ once: true }}
+                  />
+                </motion.div>
+
+                <motion.h3
+                  className="text-3xl md:text-4xl font-bold mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  <span className="text-white">Ready to Start Your</span>{' '}
+                  <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                    Creative Journey?
+                  </span>
+                </motion.h3>
+
+                <motion.p
+                  className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  Let's bring your vision to life! Get in touch with our creative team and discover how we can transform your ideas into extraordinary visual experiences.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  viewport={{ once: true }}
+                  className="inline-block"
+                >
+                  <motion.div
+                    className="relative inline-flex items-center space-x-3 px-8 py-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/20 group-hover:border-purple-400/50 transition-all duration-300"
+                    whileHover={{ 
+                      scale: 1.05,
+                      boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)'
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {/* Animated arrow */}
+                    <motion.div
+                      className="text-purple-400"
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ 
+                        duration: 2, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      →
+                    </motion.div>
+                    <span className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      Get In Touch
+                    </span>
+                    
+                    {/* Ripple effect on hover */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-purple-400/10 opacity-0 group-hover:opacity-100"
+                      initial={false}
+                      animate={{ 
+                        scale: [0.8, 1.2, 1],
+                        opacity: [0, 0.3, 0]
+                      }}
+                      transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity,
+                        repeatDelay: 0.5
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
