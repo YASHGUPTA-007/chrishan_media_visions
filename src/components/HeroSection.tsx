@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, Play } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Hero3DScene from './Hero3DScene';
-import heroBg1 from '@/assets/hero-bg-1.jpg';
-import heroBg2 from '@/assets/hero-bg-2.jpg';
-import heroBg3 from '@/assets/hero-bg-3.jpg';
+import { motion } from "framer-motion";
+import { ArrowRight, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Hero3DScene from "./Hero3DScene";
+import heroBg1 from "@/assets/hero-bg-1.jpg";
+import heroBg2 from "@/assets/hero-bg-2.jpg";
+import heroBg3 from "@/assets/hero-bg-3.jpg";
 
 const HeroSection = () => {
   const backgroundImages = [heroBg1, heroBg2, heroBg3];
@@ -19,7 +19,10 @@ const HeroSection = () => {
             <motion.div
               key={index}
               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-              style={{ backgroundImage: `url(${bg})`, willChange: 'opacity, transform' }}
+              style={{
+                backgroundImage: `url(${bg})`,
+                willChange: "opacity, transform",
+              }}
               initial={{ opacity: 0.3, scale: 1 }}
               animate={{
                 opacity: [0.3, 0.5, 0.3],
@@ -29,7 +32,7 @@ const HeroSection = () => {
                 duration: 8,
                 delay: index * 2.5,
                 repeat: Infinity,
-                ease: 'easeInOut',
+                ease: "easeInOut",
               }}
             />
           ))}
@@ -40,7 +43,10 @@ const HeroSection = () => {
         </div>
 
         {/* 3D Scene */}
-        <div className="absolute inset-0 opacity-60" style={{ willChange: 'transform, opacity' }}>
+        <div
+          className="absolute inset-0 opacity-60 hidden md:block"
+          style={{ willChange: "transform, opacity" }}
+        >
           <Hero3DScene />
         </div>
 
@@ -53,7 +59,7 @@ const HeroSection = () => {
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                willChange: 'transform, opacity',
+                willChange: "transform, opacity",
               }}
               animate={{
                 y: [0, -20, 0],
@@ -71,20 +77,20 @@ const HeroSection = () => {
           <motion.div
             className="absolute top-20 left-10 w-16 h-16 border-2 border-primary/30 rotate-45"
             animate={{ rotate: [45, 405] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-            style={{ willChange: 'transform' }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            style={{ willChange: "transform" }}
           />
           <motion.div
             className="absolute bottom-32 right-16 w-12 h-12 rounded-full border-2 border-accent/40"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 4, repeat: Infinity }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
           <motion.div
             className="absolute top-1/3 right-1/4 w-8 h-8 bg-secondary/20 rotate-12"
             animate={{ rotate: [12, 372] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            style={{ willChange: 'transform' }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            style={{ willChange: "transform" }}
           />
         </div>
 
@@ -106,11 +112,11 @@ const HeroSection = () => {
               <span className="block">
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                   Creative
-                </span>{' '}
+                </span>{" "}
                 <span className="text-foreground">Media</span>
               </span>
               <span className="block mt-2">
-                <span className="text-foreground">Agency</span>{' '}
+                <span className="text-foreground">Agency</span>{" "}
                 <span className="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent">
                   Excellence
                 </span>
@@ -136,10 +142,10 @@ const HeroSection = () => {
               transition={{ duration: 1, delay: 1.4 }}
             >
               {[
-                { number: '500+', label: 'Projects' },
-                { number: '50+', label: 'Clients' },
-                { number: '5+', label: 'Years' },
-                { number: '15+', label: 'Awards' },
+                { number: "500+", label: "Projects" },
+                { number: "50+", label: "Clients" },
+                { number: "5+", label: "Years" },
+                { number: "15+", label: "Awards" },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -152,7 +158,9 @@ const HeroSection = () => {
                   <div className="text-2xl md:text-3xl font-bold text-primary neon-cyan">
                     {stat.number}
                   </div>
-                  <div className="text-sm text-foreground/60 mt-1">{stat.label}</div>
+                  <div className="text-sm text-foreground/60 mt-1">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
